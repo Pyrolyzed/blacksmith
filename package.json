@@ -4,14 +4,30 @@
   "description": "A modpack managing tool",
   "main": "output/main.html",
   "scripts": {
-    "start": "nw ."
+    "start": "nw .",
+    "build": "webpack --mode production",
+    "builddev": "webpack --mode development"
   },
   "author": "Pyrolyzed, Riku",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "material-components-web": "^13.0.0"
   },
   "devDependencies": {
-    "nw": "^0.59.0"
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "nw": "^0.59.0-sdk",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.44.0",
+    "sass-loader": "^12.4.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
   }
 }

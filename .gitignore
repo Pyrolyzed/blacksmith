@@ -1,2 +1,4 @@
 node_modules
 Riku.code-workspace
+output/scripts/material.js
+output/styles/material.css
