@@ -1,9 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 
-const modpacks = new Set()
-
-exports.modpacks = modpacks;
 
 module.exports = class Modpack {
     /**
@@ -34,7 +31,11 @@ module.exports = class Modpack {
             fs.mkdirSync(this.path, {recursive: true})
             console.log(`Modpack directory created at  '${this.path}'`)
         }
-        modpacks.add(this)
+        if (!fs.existsSync(path.join(this.path, 'details.json'))) {
+            this.createFile('details.json', 
+        `{\n    "name": "${name}",\n    "mcVersion": "${mcVersion}",\n    "forgeVersion": "${forgeVersion}"\n}`)
+    
+        }
     }
 
     /**
