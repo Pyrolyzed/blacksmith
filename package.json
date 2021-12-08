@@ -1,0 +1,15 @@
+{
+  "name": "blacksmith",
+  "version": "1.0.0",
+  "description": "A modpack managing tool",
+  "main": "output/main.html",
+  "scripts": {
+    "start": "nw ."
+  },
+  "author": "Pyrolyzed, Riku",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "nw": "^0.59.0"
+  }
+}
