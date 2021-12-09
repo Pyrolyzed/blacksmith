@@ -1,8 +1,9 @@
 const fs = require('fs')
 const path = require('path')
-
+const getDirName = path.dirname
 
 module.exports = class Modpack {
+    
     /**
      * Create the modpack, this also creates the folder inside modpacks.
      * @param {string} name 
@@ -22,15 +23,19 @@ module.exports = class Modpack {
             console.log('Error! \'name\' MUST be a string!')
             return
         }
+
         console.log(`Creating modpack with arguments:\nName: ${name}\nForge Version: ${forgeVersion}\nMC Version: ${mcVersion}`)
      
         if (!fs.existsSync('modpacks')) {
             fs.mkdirSync('modpacks', {recursive: true})
         }
+
         if (!fs.existsSync(this.path)) {
             fs.mkdirSync(this.path, {recursive: true})
             console.log(`Modpack directory created at  '${this.path}'`)
         }
+
+        // Create 'details.json'
         if (!fs.existsSync(path.join(this.path, 'details.json'))) {
             this.createFile('details.json', 
         `{\n    "name": "${name}",\n    "mcVersion": "${mcVersion}",\n    "forgeVersion": "${forgeVersion}"\n}`)
@@ -89,11 +94,17 @@ module.exports = class Modpack {
      * @param {?} content 
      * @returns 
      */
+
     createFile(fPath, content=undefined) {
         fPath = path.join(this.path, fPath)
+
         if (fs.existsSync(fPath)) {
             console.log(`${fPath} already exists!`)
             return
+        }
+
+        if (!fs.existsSync(getDirName(fPath))) {
+            fs.mkdirSync(getDirName(fPath), {recursive: true})
         }
 
         fs.appendFile(fPath, content, function (err) {
@@ -124,8 +135,9 @@ module.exports = class Modpack {
     /**
      * Read a file and execute something on it
      */
-    executeFile(fPath, execute=function(data){}) {
+    execute(fPath, toExecute=function(data){}) {
         fPath = path.join(this.path, fPath)
+
         if (!fs.existsSync(fPath)) {
             console.log(`File ${fPath} does not exist!`)
             return
@@ -136,7 +148,7 @@ module.exports = class Modpack {
                 console.log(err)
                 return
             }
-            execute(data)
+            toExecute(data)
         })
     }
 
